@@ -1,0 +1,17 @@
+name: Linux Build
+
+on: push
+
+jobs:
+  build:
+    name: Build on Ubuntu
+    runs-on: ubuntu-20.04
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v4
+      with:
+        ref: 494630247454d127947ed92510c55013369520a3
+
+    - name: Build C Code
+      run: |
+       find . -name "*.c" -print0 | xargs -0 -I {} sh -c 'gcc "{}" -o "${0%.c}"' "{}"
